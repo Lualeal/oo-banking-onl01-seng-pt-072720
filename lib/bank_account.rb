@@ -1,37 +1,33 @@
 class BankAccount
+  attr_accessor :status, :balance
   attr_reader :name
-  attr_accessor :balance, :status, :account_hash
-
+  
+  #attr_reader :status, :balance
+  #attr_accessor :name
+  
   def initialize(name)
     @name = name
-    @balance = 1000
     @status = "open"
+    @balance = 1000
   end
-
-  def deposit(deposit_amount)
-    @balance += deposit_amount
-  end
-
+  
   def display_balance
-    p "Your balance is $#{self.balance}."
+    "Your balance is $#{@balance}."
   end
-
-  def status=(status)
-    @status
+  
+  def deposit(amount)
+    @balance += amount
   end
-
-  def balance=(balance)
-    @balance
-  end
-
+  
   def valid?
-    (!!status == 'open') && (!!balance > 0)
+    @status == "open" && @balance > 0 ? true : false
   end
-
-def account_hash
-    instance_variables.map do |var|
-        [var[1..-1].to_sym, instance_variable_get(var)]
-    end.to_h
+  
+  #def name=(name)
+    #raise StandardError.new "Can't change name"
+  #end
+  
+  def close_account
+    @status = "closed"
   end
-
 end
